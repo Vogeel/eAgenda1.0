@@ -35,9 +35,14 @@ namespace eAgenda1._0.ModuloContato
 
         public new void VisualizarRegistros(string tipoVisualizacao)
         {
-            if (tipoVisualizacao == "Tela")
-                MostrarTitulo("Visualização de Contatos");
-            base.VisualizarRegistros(tipoVisualizacao);
+            MostrarTitulo($"Vizualizando contatos agrupados");
+            if (tipoVisualizacao == "pesquisando ")
+                return;
+            _repositorioContato.VisualizarAgrupadoPorCargo();
+            foreach (object entidade in _repositorioContato.SelecionarTodos())
+            {
+                Console.WriteLine(entidade.ToString() + Environment.NewLine);
+            }
         }
 
         private bool validTelephoneNo(string telNo)

@@ -44,9 +44,9 @@ namespace eAgenda1._0.ModuloCompromisso
             base.Excluir();
         }
 
-        public override void  VisualizarRegistros()
+        public new void  VisualizarRegistros(string tipo)
         {
-            if (!VisualizarRegistros("pesquisando"))
+            if (tipo == "pesquisando")
                 return;
             Console.WriteLine("deseja visualizar qual compromissos\n" +
                 "1 = passados\n" +

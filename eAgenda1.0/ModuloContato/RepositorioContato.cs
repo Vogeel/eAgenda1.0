@@ -7,7 +7,7 @@ namespace eAgenda1._0.ModuloContato
     {
         public void VisualizarAgrupadoPorCargo()
         {
-
+            registros.Sort();
         }
 
         public Contato PegarRegistro(int id)
