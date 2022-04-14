@@ -11,16 +11,13 @@ namespace eAgenda1._0.ModuloTarefa
     public class TelaCadastroTarefa : TelaBase<RepositorioTarefa, Tarefa>
     {
         readonly RepositorioTarefa _repositorioTarefa;
-        readonly Notificador _notificador;
+
          TelaCadastroItem _telaCadastroItem;
          RepositorioItem _repositorioItem;
         
-        public TelaCadastroTarefa(RepositorioTarefa repositorioTarefa, Notificador notificador) : base("Cadastro de Tarefas", repositorioTarefa)
+        public TelaCadastroTarefa(RepositorioTarefa repositorioTarefa) : base("Cadastro de Tarefas", repositorioTarefa)
         {
-            _repositorioTarefa = repositorioTarefa;
-            _notificador = notificador;
-          
-            
+            _repositorioTarefa = repositorioTarefa;    
         }
         public override string MostrarOpcoes()
         {
@@ -38,14 +35,11 @@ namespace eAgenda1._0.ModuloTarefa
 
             return opcao;
         }
-        public void MostrarTarefasComplestas()
-        {
 
-        }
         public void InserirItem()
         {
-            if (!VisualizarRegistros("Pesquisando"))
-                return;
+          
+            
             int id = ObterNumeroId();
             _telaCadastroItem = _repositorioTarefa.PegarTela(id);
             
@@ -112,8 +106,8 @@ namespace eAgenda1._0.ModuloTarefa
 
             _repositorioTarefa.Ordenar();
             Console.WriteLine("1 = pendentes\n" +
-                "2 = completas\n" +
-                "3 = todas");
+                "2 = completas");
+
 
             switch (Console.ReadLine())
             {
@@ -124,7 +118,7 @@ namespace eAgenda1._0.ModuloTarefa
                     foreach (Tarefa entidade in _repositorioTarefa.SelecionarTodos())
                     {
 
-                        if (entidade.PercentualConclusao != 1)                       
+                        if (entidade.porcentualConclusao != 1)                       
                             Console.WriteLine(entidade.ToString() + Environment.NewLine);
                         
                         
@@ -136,16 +130,14 @@ namespace eAgenda1._0.ModuloTarefa
 
                      foreach (Tarefa entidade in _repositorioTarefa.SelecionarTodos())
                      {
-                        if (entidade.PercentualConclusao == 1)                        
+                        if (entidade.porcentualConclusao == 1)                        
                             Console.WriteLine(entidade.ToString() + Environment.NewLine);
                             
                         
                      }
                     Console.ReadLine();
                     break;
-                case "3":
-                    VisualizarRegistros("tela");
-                    break;
+
 
                     
 
@@ -158,7 +150,8 @@ namespace eAgenda1._0.ModuloTarefa
             string titulo;
             int numero = 0;
             Prioridade prioridade;
-            DateTime data;
+            DateTime datafim;
+            DateTime datainicio;
 
             if (editar)
             {
@@ -214,10 +207,14 @@ namespace eAgenda1._0.ModuloTarefa
             titulo = Console.ReadLine();
             do
             {
+                Console.WriteLine("data de inicio");
+            } while (!(DateTime.TryParse(Console.ReadLine(), out datainicio)));
+            do
+            {
                 Console.WriteLine("data de conclusão");
-            } while (!(DateTime.TryParse(Console.ReadLine(), out data)));
-            Tarefa t = new Tarefa(prioridade, titulo, DateTime.Now, data);
-            t.PercentualConclusao = 1;
+            } while (!(DateTime.TryParse(Console.ReadLine(), out datafim)));
+            Tarefa t = new Tarefa(prioridade, titulo, datainicio, datafim);
+            t.porcentualConclusao = 1;
             return t;
 
         }

@@ -22,20 +22,20 @@ namespace eAgenda1._0.Compartilhado
         private RepositorioCompromisso repositorioCompromisso;
         private TelaCadastroCompromisso telaCadastroCompromisso;
 
-        public TelaMenuPrincipal(Notificador notificador)
+        public TelaMenuPrincipal()
         {
             repositorioTarefa = new RepositorioTarefa();
-            telaCadastroTarefa = new TelaCadastroTarefa( repositorioTarefa, notificador);
+            telaCadastroTarefa = new TelaCadastroTarefa( repositorioTarefa);
 
 
             repositorioItem = new RepositorioItem();
-            telaCadastroItem = new TelaCadastroItem(repositorioItem, notificador);
+            telaCadastroItem = new TelaCadastroItem(repositorioItem);
 
             repositorioContato = new RepositorioContato();
-            telaCadastroContato = new TelaCadastroContato(repositorioContato, notificador);
+            telaCadastroContato = new TelaCadastroContato(repositorioContato);
 
             repositorioCompromisso = new RepositorioCompromisso();
-            telaCadastroCompromisso = new TelaCadastroCompromisso(repositorioCompromisso, notificador, repositorioContato, telaCadastroContato);
+            telaCadastroCompromisso = new TelaCadastroCompromisso(repositorioCompromisso, repositorioContato, telaCadastroContato);
             repositorioContato.Inserir(new Contato("a", "b", "c", "d", "e"));
             repositorioCompromisso.Inserir(new Compromisso("a", "a", DateTime.Parse("13/04/2022 23:26"), DateTime.Parse("13/04/2022 23:22"), new Contato("a", "b", "c", "d", "e")));
             repositorioCompromisso.Inserir(new Compromisso("a", "a", DateTime.Parse("13/04/2021 5:26"), DateTime.Parse("13/04/2021 5:22"), new Contato("a", "b", "c", "d", "e")));

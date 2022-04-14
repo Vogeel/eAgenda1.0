@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace eAgenda1._0.ModuloTarefa
 {
-    public class Tarefa : EntidadeBase
+    public class Tarefa : EntidadeBase, IComparable<Tarefa>
     {
         public TelaCadastroItem _telaCadastroItem;
         public RepositorioItem _repositorioItem;
-        readonly Notificador notificador;
+
         public readonly Prioridade prioridade;
         readonly DateTime readodataCriacao;
         readonly DateTime dataFim;
-        readonly double porcentualConclusao;
+        public double porcentualConclusao;
         List<Item> items = new List<Item>();
         string titulo;
 
@@ -27,26 +27,24 @@ namespace eAgenda1._0.ModuloTarefa
             DataCriacao = dataCriacao;
             DataFim = dataFim;
             _repositorioItem = new RepositorioItem();
-            _telaCadastroItem = new TelaCadastroItem(_repositorioItem, notificador);
+            _telaCadastroItem = new TelaCadastroItem(_repositorioItem);
             
         }
         public string Titulo { get; set; }
         public string Prioridade { get; set; }
         public DateTime DataCriacao { get; set; }
         public DateTime DataFim { get; set; }
-        public double PorcentualConclusao { get; set; }
         public List<Item> Items { get; internal set; }
-        public double PercentualConclusao { get; internal set; }
+
 
         public override string ToString()
         {
             return "id :" + id +
                 "\ntitulo :" + Titulo +
-                "\nPrioridade :" + Prioridade +
-                
+                "\nPrioridade :" + Prioridade +            
                 "\nData criação: " + DataCriacao +
                 "\nData conclusão: " + DataFim +
-                "\nPercentual de conclusão: " + PorcentualConclusao * 100 + "%";            
+                $"\nPercentual de conclusão: { porcentualConclusao * 100 } %";            
         }
         public int CompareTo(Tarefa other)
         {

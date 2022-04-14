@@ -8,6 +8,6 @@ namespace eAgenda1._0.ModuloTarefa
 {
     public enum Prioridade
     {
-        Alta, Baixa, Media
+        Baixa, Media, Alta
     }
 }

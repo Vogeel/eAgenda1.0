@@ -10,13 +10,29 @@ namespace eAgenda1._0.ModuloItem
 {
     public class TelaCadastroItem : TelaBase<RepositorioItem, Item>
     {
-        public  Notificador _notificador;
+
         public  RepositorioItem _repositorioItem;
 
-        public TelaCadastroItem(RepositorioItem repositorioItem, Notificador notificador ) : base("Cadastro de itens", repositorioItem)
+        public TelaCadastroItem(RepositorioItem repositorioItem) : base("Cadastro de itens", repositorioItem)
         {
-            _notificador = notificador;
+
             _repositorioItem = repositorioItem;
+        }
+        public override string MostrarOpcoes()
+        {
+            MostrarTitulo(Titulo);
+
+            Console.WriteLine("Digite 1 para Inserir");
+            Console.WriteLine("Digite 2 para Editar");
+            Console.WriteLine("Digite 3 para Excluir");
+            Console.WriteLine("Digite 4 para Visualizar");
+            Console.WriteLine("Digite 5 para concluir um item");
+
+            Console.WriteLine("Digite s para sair");
+
+            string opcao = Console.ReadLine();
+
+            return opcao;
         }
         public void Inserir()
         {
@@ -59,10 +75,10 @@ namespace eAgenda1._0.ModuloItem
         {
             if (_repositorioItem.Concluir(ObterNumeroId()))
 
-                _notificador.ApresentarMensagem("item concluido com sucesso", TipoMensagem.Sucesso);
+                Notificador.ApresentarMensagem("item concluido com sucesso", TipoMensagem.Sucesso);
 
             else
-                _notificador.ApresentarMensagem("nao encontrado", TipoMensagem.Erro);
+                Notificador.ApresentarMensagem("nao encontrado", TipoMensagem.Erro);
         }
     }
 }

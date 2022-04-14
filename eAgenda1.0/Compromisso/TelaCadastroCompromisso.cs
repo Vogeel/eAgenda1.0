@@ -11,15 +11,15 @@ namespace eAgenda1._0.ModuloCompromisso
 {
     public class TelaCadastroCompromisso : TelaBase<RepositorioCompromisso, Compromisso>
     {
-        readonly Notificador _notificador;
+
         readonly RepositorioCompromisso _repositorioCompromisso;
         readonly RepositorioContato _repositorioContato;
         readonly TelaCadastroContato _telaCadastroContato;
-        public TelaCadastroCompromisso(RepositorioCompromisso repositorioCompromisso,  Notificador notificador,  RepositorioContato repositorioContato, TelaCadastroContato telaCadastroContato)
+        public TelaCadastroCompromisso(RepositorioCompromisso repositorioCompromisso,  RepositorioContato repositorioContato, TelaCadastroContato telaCadastroContato)
             : base("Cadastro de Compromissos", repositorioCompromisso)
         {
             _repositorioCompromisso = repositorioCompromisso;
-            _notificador = notificador;
+
             _repositorioContato = repositorioContato;
             _telaCadastroContato = telaCadastroContato;
         }

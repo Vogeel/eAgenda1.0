@@ -8,7 +8,7 @@ namespace eAgenda1._0.Compartilhado
 {
     public abstract class TelaBase<RepositorioBase,T>  where T : EntidadeBase
     {
-        readonly Notificador notificador = new();
+
         private RepositorioBase<T> repositorio;
         protected string Titulo { get; set; }
 
@@ -54,14 +54,14 @@ namespace eAgenda1._0.Compartilhado
 
             if (temEntidadesRegistrados == false)
             {
-                notificador.ApresentarMensagem("Nenhum registro cadastrado para excluir.", TipoMensagem.Atencao);
+                Notificador.ApresentarMensagem("Nenhum registro cadastrado para excluir.", TipoMensagem.Atencao);
                 return;
             }
         }
         protected virtual void Inserir(T entidade)// funcionaou? sim.. vai mexer? nao
         {
             repositorio.Inserir(entidade);
-            notificador.ApresentarMensagem("registro cadastrado com sucesso!", TipoMensagem.Sucesso);
+            Notificador.ApresentarMensagem("registro cadastrado com sucesso!", TipoMensagem.Sucesso);
         }
 
         public virtual bool VisualizarRegistros(string tipoVisualizacao)// funcionaou? sim.. vai mexer? nao
@@ -71,7 +71,7 @@ namespace eAgenda1._0.Compartilhado
 
             if (registros.Count == 0)
             {
-                notificador.ApresentarMensagem("Nenhum registro disponível.", TipoMensagem.Atencao);
+                Notificador.ApresentarMensagem("Nenhum registro disponível.", TipoMensagem.Atencao);
                 return false;
             }
 
@@ -92,7 +92,7 @@ namespace eAgenda1._0.Compartilhado
 
             if (temEntidadesRegistrados == false)
             {
-                notificador.ApresentarMensagem("Nenhum cadastrado para editar.", TipoMensagem.Atencao);
+                Notificador.ApresentarMensagem("Nenhum cadastrado para editar.", TipoMensagem.Atencao);
                 return;
             }
         }

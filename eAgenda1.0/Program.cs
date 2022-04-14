@@ -11,8 +11,8 @@ namespace eAgenda1._0
         private static string tipoVisualizacao;
         static void Main(string[] args)
         {
-            Notificador notificador = new();
-            TelaMenuPrincipal telaMenuPrincipal = new(notificador);
+
+            TelaMenuPrincipal telaMenuPrincipal = new();
 
             while(true)
             {

@@ -7,12 +7,11 @@ namespace eAgenda1._0.ModuloContato
 {
     public class TelaCadastroContato : TelaBase<RepositorioContato, Contato>
     {
-        readonly Notificador _notificador;
+
         readonly RepositorioContato _repositorioContato;
-        public TelaCadastroContato(RepositorioContato repositorioContato, Notificador notificador ) : base("Cadastro de Contatos", repositorioContato)
+        public TelaCadastroContato(RepositorioContato repositorioContato) : base("Cadastro de Contatos", repositorioContato)
         {
             _repositorioContato = repositorioContato;
-            _notificador = notificador;
         }
         public void Inserir()
         {

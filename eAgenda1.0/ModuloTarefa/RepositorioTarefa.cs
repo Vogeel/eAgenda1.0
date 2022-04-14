@@ -19,7 +19,7 @@ namespace eAgenda1._0.ModuloTarefa
                 if (item.concluido)
                     contador++;
             }
-            registros[index].PercentualConclusao = (double)contador / (double)registros[index].Items.Count;
+            registros[index].porcentualConclusao = (double)contador / (double)registros[index].Items.Count;
         }
 
         internal bool AtualizarItems(int numeroId, List<Item> items)
@@ -30,6 +30,7 @@ namespace eAgenda1._0.ModuloTarefa
                 return false;
             registros[index].Items = items;
             AtualizarPercentual(index);
+
             return true;
         }
 
@@ -42,7 +43,7 @@ namespace eAgenda1._0.ModuloTarefa
         {
             int index = registros.FindIndex(x => x.id == id);
 
-            if (index == -1 || registros[index].PercentualConclusao != 1)
+            if (index == -1 || registros[index].porcentualConclusao != 1)
                 return false;
             registros.RemoveAt(index);
             return true;
