@@ -44,11 +44,46 @@ namespace eAgenda1._0.ModuloCompromisso
             base.Excluir();
         }
 
-        public new void VisualizarRegistros(string tipoVisualizacao)
+        public override void  VisualizarRegistros()
         {
-            if (tipoVisualizacao == "Tela")
-                MostrarTitulo("Visualização de Compromissos");
-            base.VisualizarRegistros(tipoVisualizacao);
+            if (!VisualizarRegistros("pesquisando"))
+                return;
+            Console.WriteLine("deseja visualizar qual compromissos\n" +
+                "1 = passados\n" +
+                "2 = semanal\n" +
+                "3 = diaria");
+
+            switch (Console.ReadLine())
+            {
+                case "1":
+                    MostrarTitulo($"Vizualizando Compromissos passados");
+                    foreach (Compromisso compromisso in _repositorioCompromisso.SelecionarTodos())
+                    {
+                        TimeSpan tempo = compromisso.DataFim - DateTime.Today;
+                        if (tempo.Days < 0)
+                            Console.WriteLine(compromisso.ToString() + Environment.NewLine);
+                    }
+                    break;
+                case "2":
+                    MostrarTitulo($"Vizualizando Compromissos semanal");
+                    foreach (Compromisso compromisso in _repositorioCompromisso.SelecionarTodos())
+                    {
+                        TimeSpan tempo = compromisso.DataFim - DateTime.Today;
+                        if (tempo.Days >= 1 && tempo.Days <= 7 && tempo.Seconds > 0)
+                            Console.WriteLine(compromisso.ToString() + Environment.NewLine);
+                    }
+                    break;
+                case "3":
+                    MostrarTitulo($"Vizualizando Compromissos diario");
+                    foreach (Compromisso compromisso in _repositorioCompromisso.SelecionarTodos())
+                    {
+                        TimeSpan tempo = compromisso.DataFim - DateTime.Today;
+                        if (tempo.Days >= 0 && tempo.Days < 1 && tempo.Seconds > 0)
+                            Console.WriteLine(compromisso.ToString() + Environment.NewLine);
+                    }
+                    break;
+              
+            }
         }
 
         private Compromisso ObterCompromisso()
